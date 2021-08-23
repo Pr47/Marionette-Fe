@@ -98,7 +98,7 @@ const hudMenuAssertion = [
   }
 ]
 
-class HUDMenu extends React.Component {
+class HUDMenu extends React.PureComponent {
   render() {
     typeAssert(this.props.content, hudMenuAssertion)
 
