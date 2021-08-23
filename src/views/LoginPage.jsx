@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 
 import { mobius } from '../utils/mobius'
 import { saveCreds } from '../utils/credUtil'
+import { loginMenu } from '../data/menu'
 
 class Login extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Login extends React.Component {
       if (success) {
         saveCreds(result)
         self.props.history.replace('/index')
+        self.props.setMenuContent(loginMenu)
       } else {
         this.props.enqueueSnackbar(`登录错误: ${message}`)
       }
@@ -63,7 +65,8 @@ class Login extends React.Component {
 
 Login.propTypes = {
   history: PropTypes.object.isRequired,
-  enqueueSnackbar: PropTypes.func.isRequired
+  enqueueSnackbar: PropTypes.func.isRequired,
+  setMenuContent: PropTypes.func.isRequired
 }
 
 export default withSnackbar(withRouter(Login))

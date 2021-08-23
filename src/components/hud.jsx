@@ -1,10 +1,12 @@
 import React from 'react'
 import {
-  Box, AppBar, Toolbar, Button, Menu, MenuItem
+  Box, AppBar, Toolbar, Menu, MenuItem
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
+import { Link, withRouter } from 'react-router-dom'
 
-import { DenseButton } from './button'
+import { DenseButton } from './button.jsx'
+import { typeAssert } from '../utils/typeAssert'
 
 const HUDMenuItemStyle = {
   paddingTop: '2px !important',
@@ -27,7 +29,9 @@ const HUDPopMenuStyle = {
 }
 
 const HUDMenuItem = (props) => {
-  const { children, onClick, sx, ...rest } = props
+  const {
+    children, onClick, ...rest
+  } = props
 
   return (
     <MenuItem
@@ -40,9 +44,13 @@ const HUDMenuItem = (props) => {
   )
 }
 
+HUDMenuItem.propTypes = {
+  children: PropTypes.any.isRequired,
+  onClick: PropTypes.func.isRequired
+}
+
 const HUDMenuButton = (props) => {
-  console.log(props)
-  const { text } = props
+  const { id, text, items } = props
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
 
@@ -53,6 +61,12 @@ const HUDMenuButton = (props) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const menuItems = items.map(item => (
+    <HUDMenuItem key={`menu-item-${id}-${item.id}`} onClick={handleClose} component={Link} to={item.link}>
+      {item.text}
+    </HUDMenuItem>
+  ))
 
   return (
     <div>
@@ -70,28 +84,49 @@ const HUDMenuButton = (props) => {
         onClose={handleClose}
         sx={HUDPopMenuStyle}
       >
-        <HUDMenuItem onClick={handleClose}>Testing</HUDMenuItem>
-        <HUDMenuItem onClick={handleClose}>Testing</HUDMenuItem>
-        <HUDMenuItem onClick={handleClose}>Testing</HUDMenuItem>
+        { menuItems }
       </Menu>
     </div>
   )
 }
 
-export default class HUDMenu extends React.Component {
+HUDMenuButton.propTypes = {
+  id: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired
+}
+
+const hudMenuAssertion = [
+  {
+    id: 'string',
+    text: 'string',
+    items: [
+      {
+        id: 'string',
+        text: 'string',
+        link: 'string'
+      }
+    ]
+  }
+]
+
+class HUDMenu extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    typeAssert(props.content, hudMenuAssertion)
   }
 
   render() {
+    const subMenus = this.props.content.map(subMenu => (
+      <HUDMenuButton id={subMenu.id} key={`sub-menu-${subMenu.id}`} text={subMenu.text} items={subMenu.items}/>
+    ))
+
     return (
       <Box>
         <AppBar position="static">
           <Toolbar variant="dense" sx={{ minHeight: '0' }}>
-            <HUDMenuButton text="ABCD"/>
-            <HUDMenuButton text="DEFG"/>
+            { subMenus }
           </Toolbar>
         </AppBar>
       </Box>
@@ -100,5 +135,7 @@ export default class HUDMenu extends React.Component {
 }
 
 HUDMenu.propTypes = {
-  items: PropTypes.array
+  content: PropTypes.array
 }
+
+export default withRouter(HUDMenu)
