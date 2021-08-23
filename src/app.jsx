@@ -6,11 +6,13 @@ import { Button } from '@material-ui/core'
 
 import Login from './views/LoginPage.jsx'
 import Index from './views/IndexPage.jsx'
+import HUDMenu from './components/hud.jsx'
 
 const App = () => {
   const history = useHistory()
   return (
     <BrowserRouter>
+      <HUDMenu />
       <div className="App">
         <Switch>
           <Route exact path="/login">
