@@ -10,6 +10,7 @@ import { typeAssert } from '../utils/typeAssert'
 const HUDMenuItemStyle = {
   paddingTop: '2px !important',
   paddingBottom: '2px !important',
+  fontSize: '0.875rem',
   ':hover': {
     backgroundColor: '#1976d2',
     color: '#fff'

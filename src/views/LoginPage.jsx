@@ -1,10 +1,10 @@
 import React from 'react'
 import {
-  TextField,
-  Button
+  Button, Grid, Card, CardContent, Typography
 } from '@material-ui/core'
 import { withSnackbar } from 'notistack'
 import { withRouter } from 'react-router-dom'
+import { DenseInput } from '../components/input.jsx'
 
 import { mobius } from '../utils/mobius'
 import { saveCreds } from '../utils/credUtil'
@@ -40,24 +40,56 @@ class Login extends React.Component {
 
   render() {
     return (
-      <>
-        <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-          <TextField
-            required
-            id="userName"
-            label="用户名"
-            value={this.state.userName}
-            onInput={ e => this.setState({ userName: e.target.value }) }
-            />
-          <TextField
-            required
-            id="password"
-            label="密码"
-            value={this.state.password}
-            onInput={ e => this.setState({ password: e.target.value }) }/>
-          <Button type="submit" onClick={this.handleSubmit}>Login</Button>
-        </form>
-      </>
+      <Grid
+        container
+        direction="column"
+        sx={{ height: '100%' }}
+        alignContent="center"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Card sx={{ borderRadius: '0' }} elevation={5}>
+          <CardContent sx={{ paddingBottom: '0', marginBottom: '0' }}>
+            <Grid container justifyContent="center">
+              <Typography variant="h6" component="div">登录</Typography>
+            </Grid>
+            <hr/>
+            <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+              <Grid sx={{ padding: '4px' }}>
+                <DenseInput
+                  required
+                  id="userName"
+                  placeholder="用户名"
+                  value={this.state.userName}
+                  onInput={ e => this.setState({ userName: e.target.value }) }
+                  />
+              </Grid>
+              <Grid sx={{ padding: '4px' }}>
+                <DenseInput
+                  required
+                  id="password"
+                  type="password"
+                  placeholder="密码"
+                  value={this.state.password}
+                  onInput={ e => this.setState({ password: e.target.value }) }/>
+              </Grid>
+              <Grid container justifyContent="center">
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginTop: '8px',
+                    borderRadius: '0'
+                  }}
+                  type="submit"
+                  onClick={this.handleSubmit}
+                >
+                  登录
+                </Button>
+              </Grid>
+            </form>
+          </CardContent>
+        </Card>
+      </Grid>
     )
   }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import {
   BrowserRouter, Switch, Route, Link, useHistory
 } from 'react-router-dom'
-import { Button } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 
 import Login from './views/LoginPage.jsx'
 import Logout from './views/Logout.jsx'
@@ -17,7 +17,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <HUDMenu content={menuContent} />
-      <div className="App">
+      <Box className="App" sx={{ flex: 'auto', height: '95vh' }}>
         <Switch>
           <Route exact path="/login">
             <Login history={history} setMenuContent={setMenuContent}/>
@@ -35,7 +35,7 @@ const App = () => {
             </Link>
           </Route>
         </Switch>
-      </div>
+      </Box>
     </BrowserRouter>
   )
 }

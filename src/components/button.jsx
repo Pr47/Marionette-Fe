@@ -1,7 +1,5 @@
 import React from 'react'
-
 import { Button } from '@material-ui/core'
-import PropTypes from 'prop-types'
 
 export const DenseButtonStyle = {
   borderRadius: '0',
@@ -20,8 +18,4 @@ export const DenseButton = props => {
       {children}
     </Button>
   )
-}
-
-DenseButton.propTypes = {
-  children: PropTypes.any
 }
