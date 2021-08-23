@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Box, AppBar, Toolbar, Menu, MenuItem
 } from '@material-ui/core'
-import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 
 import { DenseButton } from './button.jsx'
@@ -42,11 +41,6 @@ const HUDMenuItem = (props) => {
       {children}
     </MenuItem>
   )
-}
-
-HUDMenuItem.propTypes = {
-  children: PropTypes.any.isRequired,
-  onClick: PropTypes.func.isRequired
 }
 
 const HUDMenuButton = (props) => {
@@ -90,12 +84,6 @@ const HUDMenuButton = (props) => {
   )
 }
 
-HUDMenuButton.propTypes = {
-  id: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired
-}
-
 const hudMenuAssertion = [
   {
     id: 'string',
@@ -111,13 +99,9 @@ const hudMenuAssertion = [
 ]
 
 class HUDMenu extends React.Component {
-  constructor(props) {
-    super(props)
-
-    typeAssert(props.content, hudMenuAssertion)
-  }
-
   render() {
+    typeAssert(this.props.content, hudMenuAssertion)
+
     const subMenus = this.props.content.map(subMenu => (
       <HUDMenuButton id={subMenu.id} key={`sub-menu-${subMenu.id}`} text={subMenu.text} items={subMenu.items}/>
     ))
@@ -132,10 +116,6 @@ class HUDMenu extends React.Component {
       </Box>
     )
   }
-}
-
-HUDMenu.propTypes = {
-  content: PropTypes.array
 }
 
 export default withRouter(HUDMenu)

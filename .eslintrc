@@ -19,7 +19,8 @@
       "no-continue": "off",
       "no-else-return": "off",
       "no-return-await": "off",
-      "quote-props": "off"
+      "quote-props": "off",
+      "react/prop-types": "off"
     },
     "settings": {
         "react": {
