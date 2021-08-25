@@ -228,8 +228,6 @@ Object.defineProperty(ChainType.prototype, 'chainWith', {
   configurable: false,
   writable: false,
   value(that) {
-    console.trace(this)
-    console.trace(that)
     if (that.constructor === ChainType.prototype.constructor) {
       return new ChainType([...this.types, ...that.types])
     } else {
@@ -243,8 +241,6 @@ Object.defineProperty(Object.prototype, 'chainWith', {
   configurable: false,
   writable: false,
   value(that) {
-    console.trace(this)
-    console.trace(that)
     return (new ChainType([this])).chainWith(that)
   }
 })

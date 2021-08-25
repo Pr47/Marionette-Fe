@@ -1,10 +1,11 @@
 const { typeAssert } = require('./typeAssert.cjs')
 const cfgattr = require('../src/config/cfgattr.json')
+const uuid = require('uuid').v4
 
 const fakeCred = (() => {
   const ret = {}
   for (const cred of cfgattr.creds) {
-    ret[cred.key] = '114-514-1919-810'
+    ret[cred.key] = uuid()
   }
   return ret
 })()

@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Button, Grid, Card, CardContent, Typography
+  Button, Grid, Card, CardContent
 } from '@material-ui/core'
 import { withSnackbar } from 'notistack'
 import { withRouter } from 'react-router-dom'
@@ -48,12 +48,8 @@ class Login extends React.Component {
         alignItems="center"
         justifyContent="center"
       >
-        <Card sx={{ borderRadius: '0' }} elevation={5}>
+        <Card sx={{ borderRadius: '0', '& > .MuiCardContent-root': { paddingBottom: '18px' } }} elevation={5}>
           <CardContent sx={{ paddingBottom: '0', marginBottom: '0' }}>
-            <Grid container justifyContent="center">
-              <Typography variant="h6" component="div">登录</Typography>
-            </Grid>
-            <hr/>
             <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
               <Grid sx={{ padding: '4px' }}>
                 <DenseInput
@@ -62,7 +58,7 @@ class Login extends React.Component {
                   placeholder="用户名"
                   value={this.state.userName}
                   onInput={ e => this.setState({ userName: e.target.value }) }
-                  />
+                />
               </Grid>
               <Grid sx={{ padding: '4px' }}>
                 <DenseInput
@@ -71,7 +67,8 @@ class Login extends React.Component {
                   type="password"
                   placeholder="密码"
                   value={this.state.password}
-                  onInput={ e => this.setState({ password: e.target.value }) }/>
+                  onInput={ e => this.setState({ password: e.target.value }) }
+                />
               </Grid>
               <Grid container justifyContent="center">
                 <Button

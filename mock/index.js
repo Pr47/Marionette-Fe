@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const uuid = require('uuid').v4
 
 const { typeAssert } = require('./typeAssert.cjs')
 
@@ -28,8 +27,8 @@ app.use((req, res, next) => {
 app.post('/api/login', ({ body }, res) => {
   try {
     typeAssert(body, {
-      userName: 'string',
-      password: 'string'
+      userName: 'string'.chainWith(x => x.length !== 0 ? true : 'empty userName'),
+      password: 'string'.chainWith(x => x.length !== 0 ? true : 'empty userName')
     })
   } catch (typeAssertError) {
     console.log('type assertion failed: ', typeAssertError)
@@ -41,6 +40,7 @@ app.post('/api/login', ({ body }, res) => {
 })
 
 app.use('/api/task', taskAPI)
+app.use('/api/user', userAPI)
 
 app.listen(port, () => {
   console.log('application started')
