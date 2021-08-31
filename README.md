@@ -1,3 +1,3 @@
-## Project-Fe
+## Marionette-Fe
 
-Frontend project template, inspired by [tristana](https://github.com/xuya227939/tristana) and adjusted to fit in my personal requirements.
+Marionette, the customised CI for Pr47 project.
